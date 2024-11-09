@@ -1,6 +1,6 @@
 ---
 title: "Lab 7: Functions + Fish"
-author: "Your name here!"
+author: "Siddharth Venkiteswaran"
 format: html
 editor: source
 embed-resources: true
@@ -11,8 +11,10 @@ modular code.
 
 ```{r}
 #| label: setup
-
-
+library(tidyverse)
+blackfoot_fish <- read_csv(file = here::here("data", 
+                                      "BlackfootFish.csv"), 
+                    show_col_types = FALSE)
 ```
 
 ## The Data
