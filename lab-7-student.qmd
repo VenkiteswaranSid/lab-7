@@ -46,8 +46,13 @@ measurement errors.
 
 ```{r}
 #| label: find-missing-values
-
+## I used this to help me solve this question
+## https://stackoverflow.com/questions/3991905/sum-rows-in-data-frame-or-matrix
+blackfoot_fish |>
+  summarise(across(.cols = everything(),
+                   .fns = ~sum(is.na(.))))
 ```
+There are 1796 observations with missing values. These missing values are all in the variable of weight. 
 
 **2. Create ONE thoughtful visualization that explores the frequency of missing values across the different years, sections, and trips.**
 
