@@ -58,6 +58,21 @@ There are 1796 observations with missing values. These missing values are all in
 
 ```{r}
 #| label: visual-of-missing-values-over-time
+blackfoot_fish |>
+  filter(is.na(weight)) |>
+  group_by(year, section, trip) |>
+  summarise(missing_weight = n()) |>
+  ggplot(aes(x = year, 
+             y = missing_weight,
+             fill = factor(trip))) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~section) +
+  labs(title = "Missing Weights of Trout Over the Years \n(Grouped by Species and Section)",
+       x = "Year",
+       y = NULL,
+       subtitle = "Number of Missing Weights",
+       fill = "Trip") +
+  theme_bw()
 
 ```
 
