@@ -73,7 +73,13 @@ dataset and variable names as inputs)!
 
 ```{r}
 #| label: condition-function
-
+condition_function <- function(fish_df, fish_weight, fish_length) {
+  stopifnot(is.data.frame(fish_df))
+  fish_df <- fish_df |>
+    mutate(condition_index = {{fish_weight}} / (({{fish_length}} ^ 3)) * 100)
+  
+  return(fish_df)
+}
 ```
 
 **4. Make a thoughtful visualization of how fish conditions have varied over the duration of this study.**
@@ -86,5 +92,18 @@ dataset and variable names as inputs)!
 
 ```{r}
 #| label: condition-indices-over-time
+fish <- condition_function(fish, weight, length) 
 
+ggplot(fish,
+       aes(x = year,
+           y = condition_index,
+           colour = section)) +
+  geom_point() +
+  scale_color_manual(values = c("darkseagreen", "darkorchid")) +
+  labs(title = "Comparing the Condition Index of Fishes by Year and Section",
+       x = "Year",
+       y = NULL,
+       subtitle = "Condition Index",
+       colour = "Section") + 
+  theme_bw()
 ```
